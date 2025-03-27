@@ -9,6 +9,10 @@ st.write("Uploadez un fichier CSV et laissez l'IA résumer les tendances pour vo
 uploaded_file = st.file_uploader("Uploader votre fichier de ventes (.csv)", type="csv")
 api_key = os.getenv("GROQ_API_KEY")
 
+if not api_key:
+    st.error("❌ Clé API Groq manquante. Ajoutez-la dans les secrets Streamlit Cloud.")
+    st.stop()
+
 if uploaded_file and api_key:
     df = pd.read_csv(uploaded_file)
     summary = df.describe(include='all').to_string()
