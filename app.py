@@ -23,7 +23,20 @@ if not api_key:
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
     st.subheader("🧾 Aperçu des données")
-    st.dataframe(df.head())
+    # Aperçu désactivé pour simplifier l'affichage
+    # st.dataframe(df.head())
+
+    # 🎨 Visualisation avec Seaborn
+    st.subheader("📊 Visualisation des tendances")
+    num_cols = df.select_dtypes(include='number').columns.tolist()
+    if len(num_cols) >= 2:
+        fig, ax = plt.subplots(figsize=(8, 4))
+        sns.scatterplot(data=df, x=num_cols[0], y=num_cols[1], ax=ax, s=60, color='#1f77b4')
+        ax.set_title(f"Relation entre {num_cols[0]} et {num_cols[1]}", fontsize=12)
+        ax.tick_params(axis='x', rotation=45)
+        st.pyplot(fig)
+    else:
+        st.info("Pas assez de colonnes numériques pour afficher une visualisation.")
 
     # 📦 Extraction de features simples pour détection de risque
     ca_total = df['ca'].sum() if 'ca' in df.columns else 0
