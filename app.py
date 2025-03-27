@@ -22,9 +22,7 @@ if not api_key:
 
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
-    st.subheader("🧾 Aperçu des données")
-    # Aperçu désactivé pour simplifier l'affichage
-    # st.dataframe(df.head())
+    st.caption("Fichier chargé avec succès.")
 
     # 🎨 Visualisation avec Seaborn
     st.subheader("📊 Visualisation des tendances")
