@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas as pd
 import requests
+import os
 
 st.title("Copilote IA - Analyse de ventes automatisée")
 st.write("Uploadez un fichier CSV et laissez l'IA résumer les tendances pour vous 🤖")
 
 uploaded_file = st.file_uploader("Uploader votre fichier de ventes (.csv)", type="csv")
-api_key = st.text_input("Clé API Groq", type="password")
+api_key = os.getenv("GROQ_API_KEY")
 
 if uploaded_file and api_key:
     df = pd.read_csv(uploaded_file)
