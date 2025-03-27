@@ -35,15 +35,22 @@ if uploaded_file:
     summary = df.describe(include='all').to_string()
 
     prompt = f"""
-    Tu es un analyste expert. Voici un tableau de données de ventes :
+Tu es un analyste senior spécialisé en performance commerciale et analyse de données.
 
-    {summary}
+Voici un tableau de données de ventes issues d'une entreprise e-commerce. Tu dois faire une lecture critique de ces données comme si tu devais conseiller une direction générale.
 
-    Merci de :
-    1. Résumer les tendances principales
-    2. Détecter les anomalies
-    3. Donner 3 recommandations concrètes et actionnables
-    """
+Ta mission :
+1. Identifier les tendances significatives (hausse, baisse, saisonnalité, produits ou canaux qui se démarquent)
+2. Détecter les anomalies ou incohérences (valeurs aberrantes, pics inhabituels, données manquantes)
+3. Mettre en évidence les leviers de croissance et les axes d'amélioration potentiels
+4. Proposer 3 recommandations **stratégiques** et **actionnables**, en t'appuyant sur l’analyse chiffrée
+
+Sois synthétique, professionnel et impactant. Utilise des formulations claires et orientées décision.
+
+Voici les données :
+
+{summary}
+"""
 
     if st.button("Analyser avec l'IA"):
         with st.spinner("Analyse en cours avec llama3-70b-8192..."):
